@@ -1,0 +1,225 @@
+# Tigrinya translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-03-26 23:03+0300\n"
+"PO-Revision-Date: 2025-03-27 00:24+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ti\n"
+"Language-Team: ti <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: app.py:15
+msgid "your-secret-key-here"
+msgstr ""
+
+#: app.py:22
+msgid "English"
+msgstr ""
+
+#: app.py:23
+msgid "አማርኛ"
+msgstr ""
+
+#: app.py:24
+msgid "Afaan Oromoo"
+msgstr ""
+
+#: app.py:25
+msgid "ትግርኛ"
+msgstr ""
+
+#: app.py:36 app.py:37
+msgid "test_key"
+msgstr ""
+
+#: app.py:38
+msgid "http://localhost:5000/payment/callback"
+msgstr ""
+
+#: app.py:90 app.py:220 app.py:256 app.py:378 app.py:460 app.py:550 app.py:592
+msgid "Available"
+msgstr ""
+
+#: app.py:102 app.py:114 app.py:258 app.py:528 app.py:555 app.py:577
+msgid "Pending"
+msgstr ""
+
+#: app.py:105
+msgid "Unpaid"
+msgstr ""
+
+#: app.py:135
+msgid "Please login first"
+msgstr ""
+
+#: app.py:154
+msgid "Deluxe"
+msgstr ""
+
+#: app.py:154
+msgid "Spacious room with city view"
+msgstr ""
+
+#: app.py:156
+msgid "Luxury"
+msgstr ""
+
+#: app.py:156
+msgid "Premium suite with extra amenities"
+msgstr ""
+
+#: app.py:158
+msgid "Standard"
+msgstr ""
+
+#: app.py:158
+msgid "Comfortable budget-friendly room"
+msgstr ""
+
+#: app.py:213
+msgid "Registration successful!"
+msgstr ""
+
+#: app.py:234
+msgid "Login successful!"
+msgstr ""
+
+#: app.py:236
+msgid "Invalid credentials"
+msgstr ""
+
+#: app.py:242
+msgid "Logged out successfully"
+msgstr ""
+
+#: app.py:254 app.py:689 app.py:690 app.py:696 app.py:697 app.py:724 app.py:725
+msgid "Paid"
+msgstr ""
+
+#: app.py:260 app.py:641
+msgid "Completed"
+msgstr ""
+
+#: app.py:290
+msgid "Customer added successfully!"
+msgstr ""
+
+#: app.py:308
+msgid "Customer updated successfully!"
+msgstr ""
+
+#: app.py:318
+msgid "Customer deleted successfully"
+msgstr ""
+
+#: app.py:327
+#, python-format
+msgid "%(name)s has been checked out"
+msgstr ""
+
+#: app.py:345 app.py:427
+msgid "Room type added successfully!"
+msgstr ""
+
+#: app.py:358 app.py:440
+msgid "Cannot delete room type - there are rooms assigned to it"
+msgstr ""
+
+#: app.py:364 app.py:446
+msgid "Room type deleted successfully"
+msgstr ""
+
+#: app.py:367 app.py:449
+msgid "Error deleting room type"
+msgstr ""
+
+#: app.py:382 app.py:464
+msgid "Room added successfully!"
+msgstr ""
+
+#: app.py:396 app.py:478
+msgid "Cannot delete room - it has associated bookings"
+msgstr ""
+
+#: app.py:402 app.py:484
+msgid "Room deleted successfully"
+msgstr ""
+
+#: app.py:405 app.py:487
+msgid "Error deleting room"
+msgstr ""
+
+#: app.py:499
+msgid "Check-out date must be after check-in date"
+msgstr ""
+
+#: app.py:555 app.py:582 app.py:691 app.py:698
+msgid "Confirmed"
+msgstr ""
+
+#: app.py:584
+msgid "Occupied"
+msgstr ""
+
+#: app.py:587
+msgid "Booking created successfully!"
+msgstr ""
+
+#: app.py:611
+msgid "Staff"
+msgstr ""
+
+#: app.py:615
+msgid "Staff member added successfully!"
+msgstr ""
+
+#: app.py:627
+msgid "Staff member deleted successfully"
+msgstr ""
+
+#: app.py:664
+msgid "Query added successfully!"
+msgstr ""
+
+#: app.py:693
+msgid "Payment successful via Telebirr!"
+msgstr ""
+
+#: app.py:700
+msgid "Payment successful via CBE!"
+msgstr ""
+
+#: app.py:706
+msgid "Payment failed. Please try again."
+msgstr ""
+
+#: app.py:723
+msgid "Failed"
+msgstr ""
+
+#: templates/admin/_base.html:44
+msgid "Luxury Hotel"
+msgstr ""
+
+#: templates/admin/_base.html:66
+msgid "Profile"
+msgstr ""
+
+#: templates/admin/_base.html:70
+msgid "Logout"
+msgstr ""
+
+#: templates/admin/_base.html:99
+msgid "© 2023 Luxury Hotel. All rights reserved."
+msgstr ""
+

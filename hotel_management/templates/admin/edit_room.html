@@ -1,0 +1,40 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="bi bi-door-open"></i> Edit Room: {{ room.room_number }}</h1>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="mb-3">
+                <label for="room_number" class="form-label">Room Number</label>
+                <input type="text" class="form-control" id="room_number" name="room_number" 
+                       value="{{ room.room_number }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="type_id" class="form-label">Room Type</label>
+                <select class="form-select" id="type_id" name="type_id" required>
+                    {% for room_type in room_types %}
+                    <option value="{{ room_type.id }}" {{ 'selected' if room_type.id == room.type_id }}>
+                        {{ room_type.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" id="status" name="status">
+                    <option value="Available" {{ 'selected' if room.status == 'Available' }}>Available</option>
+                    <option value="Occupied" {{ 'selected' if room.status == 'Occupied' }}>Occupied</option>
+                    <option value="Maintenance" {{ 'selected' if room.status == 'Maintenance' }}>Maintenance</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Room</button>
+            <a href="{{ url_for('manage_rooms') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

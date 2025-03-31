@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h3 class="mb-0">Payment Error</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Error:</strong> We encountered an issue processing your payment.
+                    </div>
+                    
+                    <div class="payment-details">
+                        <h5 class="mb-3">Payment Details</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Transaction ID:</strong> {{ payment.transaction_id }}</p>
+                                <p><strong>Amount:</strong> {{ "%.2f"|format(payment.amount) }} ETB</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Status:</strong> <span class="badge bg-warning text-dark">{{ payment.status }}</span></p>
+                                <p><strong>Date:</strong> {{ payment.timestamp.strftime('%Y-%m-%d %H:%M') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="customer-info mt-4">
+                        <h5 class="mb-3">Customer Information</h5>
+                        <p>{{ customer.first_name }} {{ customer.last_name }}</p>
+                        <p>{{ customer.email }}</p>
+                        <p>{{ customer.phone }}</p>
+                    </div>
+                    
+                    <div class="actions mt-4">
+                        <a href="{{ url_for('telebirr_payment', payment_id=payment.id) }}" class="btn btn-primary me-2">
+                            <i class="fas fa-undo me-1"></i> Try Again
+                        </a>
+                        <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-home me-1"></i> Return Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .payment-details, .customer-info {
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .card-header {
+        padding: 1.5rem;
+    }
+    
+    .actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    @media (max-width: 576px) {
+        .actions {
+            flex-direction: column;
+        }
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,152 @@
+/* Admin Layout */
+.admin-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  width: 250px;
+  background-color: #343a40;
+  color: white;
+  padding: 20px 0;
+  position: fixed;
+  height: 100%;
+  z-index: 100;
+  transition: all 0.3s;
+}
+
+.admin-main {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  transition: all 0.3s;
+}
+
+.admin-content {
+  padding: 20px;
+}
+
+/* Sidebar Styles */
+.sidebar-header {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-nav li a {
+  display: block;
+  padding: 10px 20px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li a.active {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-nav li a i {
+  margin-right: 10px;
+}
+
+.logout-link {
+  margin-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+}
+
+/* Admin Header */
+.admin-header {
+  background-color: white;
+  padding: 15px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #6c757d;
+  display: none;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info .username {
+  margin-right: 10px;
+}
+
+/* Stats Cards */
+.stat-card {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.stat-info h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.stat-info p {
+  margin: 0;
+  color: #6c757d;
+}
+
+/* Page Header */
+.page-header {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .admin-sidebar {
+      left: -250px;
+  }
+  .admin-main {
+      margin-left: 0;
+      width: 100%;
+  }
+  .sidebar-toggle {
+      display: block;
+  }
+  .admin-sidebar.show {
+      left: 0;
+  }
+  .admin-main.full-width {
+      margin-left: 0;
+  }
+}

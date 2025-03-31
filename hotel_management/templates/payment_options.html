@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Payment Options</h2>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success mb-4">
+                        <h5>Booking Summary</h5>
+                        <p>Room: {{ booking.room.room_number }} ({{ booking.room.room_type.name }})</p>
+                        <p>Dates: {{ booking.check_in.strftime('%Y-%m-%d') }} to {{ booking.check_out.strftime('%Y-%m-%d') }}</p>
+                        <p>Total Amount: ${{ booking.total_price }}</p>
+                    </div>
+                    
+                    <form method="POST">
+                        <h4 class="mb-3">Select Payment Method</h4>
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="payment_method" id="telebirr" value="telebirr" required>
+                            <label class="form-check-label" for="telebirr">
+                                <img src="{{ url_for('static', filename='images/telebirr-logo.png') }}" alt="Telebirr" style="height: 30px;">
+                                Telebirr
+                            </label>
+                        </div>
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="payment_method" id="cbe" value="cbe">
+                            <label class="form-check-label" for="cbe">
+                                <img src="{{ url_for('static', filename='images/cbe-logo.png') }}" alt="CBE" style="height: 30px;">
+                                Commercial Bank of Ethiopia
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100">Proceed with Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,52 @@
+<aside class="admin-sidebar">
+    <div class="sidebar-header">
+        <h3>Admin Panel</h3>
+    </div>
+    <ul class="sidebar-nav">
+        <li>
+            <a href="{{ url_for('admin_dashboard') }}" class="active">
+                <i class="bi bi-speedometer2"></i> Dashboard
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('manage_bookings') }}">
+                <i class="bi bi-calendar-check"></i> Bookings
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('manage_customers') }}">
+                <i class="bi bi-people"></i> Customers
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('manage_room_types') }}">
+                <i class="bi bi-building"></i> Room Types
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('manage_rooms') }}">
+                <i class="bi bi-door-open"></i> Rooms
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('manage_staff') }}">
+                <i class="bi bi-person-badge"></i> Staff
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('manage_queries') }}">
+                <i class="bi bi-question-circle"></i> Queries
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('view_reports') }}">
+                <i class="bi bi-graph-up"></i> Reports
+            </a>
+        </li>
+        <li class="logout-link">
+            <a href="{{ url_for('admin_logout') }}">
+                <i class="bi bi-box-arrow-right"></i> Logout
+            </a>
+        </li>
+    </ul>
+</aside>

@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="services-hero mb-5">
+    <div class="container">
+        <h1 class="display-4">Our Exceptional Services</h1>
+        <p class="lead">Experience unparalleled hospitality with our comprehensive range of services</p>
+    </div>
+</div>
+
+<!-- Main Services Section -->
+<section class="mb-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Hotel Services</h2>
+        <div class="row">
+            <!-- Dining Services -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 service-card">
+                    <div class="service-icon">
+                        <i class="bi bi-egg-fried"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Dining Experiences</h5>
+                        <ul class="service-list">
+                            <li>24/7 Room Service</li>
+                            <li>Gourmet Breakfast Buffet</li>
+                            <li>Fine Dining Restaurant</li>
+                            <li>Poolside Bar & Grill</li>
+                            <li>In-room Dining Packages</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wellness Services -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 service-card">
+                    <div class="service-icon">
+                        <i class="bi bi-spa"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Wellness & Spa</h5>
+                        <ul class="service-list">
+                            <li>Full-service Luxury Spa</li>
+                            <li>Massage Therapies</li>
+                            <li>Sauna & Steam Rooms</li>
+                            <li>Beauty Treatments</li>
+                            <li>Yoga & Meditation Classes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Services -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 service-card">
+                    <div class="service-icon">
+                        <i class="bi bi-briefcase"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Business Facilities</h5>
+                        <ul class="service-list">
+                            <li>24/7 Business Center</li>
+                            <li>Meeting & Conference Rooms</li>
+                            <li>High-speed WiFi</li>
+                            <li>Printing & Secretarial Services</li>
+                            <li>Video Conferencing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recreation Services -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 service-card">
+                    <div class="service-icon">
+                        <i class="bi bi-water"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Recreation</h5>
+                        <ul class="service-list">
+                            <li>Infinity Pool with City Views</li>
+                            <li>State-of-the-art Fitness Center</li>
+                            <li>Guided City Tours</li>
+                            <li>Tennis Courts</li>
+                            <li>Children's Play Area</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Concierge Services -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 service-card">
+                    <div class="service-icon">
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Concierge</h5>
+                        <ul class="service-list">
+                            <li>24/7 Personalized Concierge</li>
+                            <li>Restaurant Reservations</li>
+                            <li>Event & Show Tickets</li>
+                            <li>Transportation Arrangements</li>
+                            <li>Shopping & Sightseeing Advice</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Special Services -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 service-card">
+                    <div class="service-icon">
+                        <i class="bi bi-gift"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Special Services</h5>
+                        <ul class="service-list">
+                            <li>Romantic Packages</li>
+                            <li>Airport Transfers</li>
+                            <li>Laundry & Dry Cleaning</li>
+                            <li>Multilingual Staff</li>
+                            <li>Accessibility Services</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Premium Services Section -->
+<section class="premium-services py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Premium Services</h2>
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card premium-card h-100">
+                    <div class="row g-0">
+                        <div class="col-md-5">
+                            <img src="{{ url_for('static', filename='images/spa-service.jpg') }}" class="img-fluid rounded-start" alt="Luxury Spa">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-body">
+                                <h5 class="card-title">Signature Spa Packages</h5>
+                                <p class="card-text">Indulge in our exclusive spa treatments designed to rejuvenate your mind and body. Our expert therapists use only the finest products for a truly luxurious experience.</p>
+                                <div class="service-price">From $150</div>
+                                <a href="#" class="btn btn-outline-primary mt-3">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card premium-card h-100">
+                    <div class="row g-0">
+                        <div class="col-md-5">
+                            <img src="{{ url_for('static', filename='images/private-dining.jpg') }}" class="img-fluid rounded-start" alt="Private Dining">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-body">
+                                <h5 class="card-title">Private Dining Experiences</h5>
+                                <p class="card-text">Enjoy intimate dining with our chef's table experience or private rooftop dinners with panoramic city views. Custom menus available for special occasions.</p>
+                                <div class="service-price">From $200</div>
+                                <a href="#" class="btn btn-outline-primary mt-3">Reserve Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Service FAQs -->
+<section class="service-faq py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Service FAQs</h2>
+        <div class="accordion" id="serviceAccordion">
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                        What are your room service hours?
+                    </button>
+                </h3>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#serviceAccordion">
+                    <div class="accordion-body">
+                        Our room service is available 24 hours a day, 7 days a week. The full menu is available from 6:00 AM to 11:00 PM, with a limited late-night menu available after hours.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                        Do you offer airport transfers?
+                    </button>
+                </h3>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#serviceAccordion">
+                    <div class="accordion-body">
+                        Yes, we provide both private and shared airport transfer services. Please contact our concierge at least 24 hours in advance to arrange your transportation.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                        Are pets allowed in the hotel?
+                    </button>
+                </h3>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#serviceAccordion">
+                    <div class="accordion-body">
+                        We welcome pets up to 25 lbs in our designated pet-friendly rooms. A $50 cleaning fee applies per stay, and we offer special pet amenities including beds, bowls, and treats.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Service Contact CTA -->
+<section class="service-cta py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="mb-4">Have Special Requests?</h2>
+        <p class="lead mb-4">Our team is ready to accommodate your needs and make your stay exceptional</p>
+        <a href="{{ url_for('contact') }}" class="btn btn-light btn-lg me-2">Contact Us</a>
+        <a href="tel:+1234567890" class="btn btn-outline-light btn-lg">Call Now</a>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.services-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('../images/services-hero.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.service-card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+    font-size: 2.5rem;
+    color: #0062cc;
+    margin: 20px auto;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 98, 204, 0.1);
+    border-radius: 50%;
+}
+
+.service-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.service-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.service-list li:last-child {
+    border-bottom: none;
+}
+
+.premium-card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.service-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #0062cc;
+}
+
+.service-cta {
+    background: linear-gradient(rgba(0, 98, 204, 0.9), rgba(0, 98, 204, 0.9)), 
+                url('../images/service-cta-bg.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: rgba(0, 98, 204, 0.1);
+    color: #0062cc;
+}
+</style>
+{% endblock %}

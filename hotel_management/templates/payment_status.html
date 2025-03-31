@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header {% if payment.status == 'Paid' %}bg-success{% else %}bg-info{% endif %} text-white">
+                    <h3 class="mb-0">Payment Status</h3>
+                </div>
+                <div class="card-body">
+                    <div class="status-indicator text-center mb-4">
+                        {% if payment.status == 'Paid' %}
+                            <i class="fas fa-check-circle text-success" style="font-size: 5rem;"></i>
+                            <h2 class="text-success mt-3">Payment Successful!</h2>
+                        {% elif payment.status == 'Processing' %}
+                            <div class="spinner-border text-primary" style="width: 5rem; height: 5rem;" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <h2 class="text-primary mt-3">Processing Payment...</h2>
+                        {% else %}
+                            <i class="fas fa-exclamation-circle text-warning" style="font-size: 5rem;"></i>
+                            <h2 class="text-warning mt-3">Payment {{ payment.status }}</h2>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="payment-details">
+                        <h5 class="mb-3">Payment Details</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Transaction ID:</strong> {{ payment.transaction_id }}</p>
+                                <p><strong>Amount:</strong> {{ "%.2f"|format(payment.amount) }} ETB</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Method:</strong> Telebirr</p>
+                                <p><strong>Date:</strong> {{ payment.timestamp.strftime('%Y-%m-%d %H:%M') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {% if payment.booking %}
+                    <div class="booking-info mt-4">
+                        <h5 class="mb-3">Booking Information</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Room:</strong> {{ payment.booking.room.room_number }} ({{ payment.booking.room.room_type.name }})</p>
+                                <p><strong>Check-in:</strong> {{ payment.booking.check_in.strftime('%Y-%m-%d') }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Status:</strong> <span class="badge bg-{% if payment.booking.status == 'Confirmed' %}success{% else %}warning{% endif %}">{{ payment.booking.status }}</span></p>
+                                <p><strong>Check-out:</strong> {{ payment.booking.check_out.strftime('%Y-%m-%d') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="actions mt-4">
+                        {% if payment.status == 'Paid' %}
+                            <a href="{{ url_for('download_receipt', payment_id=payment.id) }}" class="btn btn-primary me-2">
+                                <i class="fas fa-download me-1"></i> Download Receipt
+                            </a>
+                        {% endif %}
+                        
+                        <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-home me-1"></i> Return Home
+                        </a>
+                    </div>
+                    
+                    {% if payment.status == 'Processing' %}
+                    <div class="mt-4 text-center">
+                        <p class="text-muted">This page will automatically refresh to check payment status</p>
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+{% if payment.status == 'Processing' %}
+// Auto-refresh every 5 seconds to check payment status
+setTimeout(function() {
+    window.location.reload();
+}, 5000);
+{% endif %}
+</script>
+
+<style>
+.status-indicator {
+    margin: 2rem 0;
+}
+
+.payment-details, .booking-info {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-header {
+    padding: 1.5rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+@media (max-width: 576px) {
+    .actions {
+        flex-direction: column;
+    }
+}
+</style>
+{% endblock %}

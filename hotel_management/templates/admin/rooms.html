@@ -1,0 +1,108 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="page-header d-flex justify-content-between align-items-center">
+    <h1><i class="bi bi-door-open"></i> Rooms</h1>
+    <a href="{{ url_for('manage_rooms') }}?action=new" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Add Room
+    </a>
+</div>
+
+{% if request.args.get('action') == 'new' %}
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Add New Room</h5>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="mb-3">
+                <label for="room_number" class="form-label">Room Number</label>
+                <input type="text" class="form-control" id="room_number" name="room_number" required>
+            </div>
+            <div class="mb-3">
+                <label for="type_id" class="form-label">Room Type</label>
+                <select class="form-select" id="type_id" name="type_id" required>
+                    <option value="">Select Room Type</option>
+                    {% for room_type in room_types %}
+                    <option value="{{ room_type.id }}">{{ room_type.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" id="status" name="status">
+                    <option value="Available">Available</option>
+                    <option value="Occupied">Occupied</option>
+                    <option value="Maintenance">Maintenance</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Room</button>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5>All Rooms</h5>
+            <div class="btn-group">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Filter
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="?status=all">All</a></li>
+                    <li><a class="dropdown-item" href="?status=Available">Available</a></li>
+                    <li><a class="dropdown-item" href="?status=Occupied">Occupied</a></li>
+                    <li><a class="dropdown-item" href="?status=Maintenance">Maintenance</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Room Number</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Bookings</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for room in rooms %}
+                    <tr>
+                        <td>{{ room.room_number }}</td>
+                        <td>{{ room.room_type.name }}</td>
+                        <td>
+                            <span class="badge bg-{{ 
+                                'success' if room.status == 'Available' 
+                                else 'warning' if room.status == 'Occupied' 
+                                else 'danger' 
+                            }}">
+                                {{ room.status }}
+                            </span>
+                        </td>
+                        <td>{{ room.bookings|length }}</td>
+                        <td>
+                            <a href="{{ url_for('edit_room', room_id=room.id) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <form method="POST" action="{{ url_for('delete_room', room_id=room.id) }}" class="d-inline">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

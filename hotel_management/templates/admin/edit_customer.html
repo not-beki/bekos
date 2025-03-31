@@ -1,0 +1,48 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="bi bi-person"></i> Edit Customer: {{ customer.first_name }} {{ customer.last_name }}</h1>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="first_name" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name" 
+                           value="{{ customer.first_name }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="last_name" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" 
+                           value="{{ customer.last_name }}" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" 
+                       value="{{ customer.email }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="tel" class="form-control" id="phone" name="phone" 
+                       value="{{ customer.phone }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <textarea class="form-control" id="address" name="address">{{ customer.address }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="id_number" class="form-label">ID/Passport Number</label>
+                <input type="text" class="form-control" id="id_number" name="id_number" 
+                       value="{{ customer.id_number }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Customer</button>
+            <a href="{{ url_for('manage_customers') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

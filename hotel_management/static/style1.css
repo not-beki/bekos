@@ -1,0 +1,184 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+header {
+    background: linear-gradient(135deg, #004d7a, #008793);
+    color: white;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #fdd835;
+}
+
+/* Section Styling */
+main {
+    padding: 50px 20px;
+}
+
+/* Introduction Section */
+.about-intro img {
+    width: 80%;
+    max-width: 600px;
+    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Our Story */
+.our-story {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    margin: 30px auto;
+    max-width: 800px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.our-story img {
+    width: 100%;
+    max-width: 700px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+/* Mission & Vision */
+.mission-vision {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.mission, .vision {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.mission h3, .vision h3 {
+    color: #008793;
+}
+
+/* Team Section */
+.team {
+    margin: 50px auto;
+    text-align: center;
+}
+
+.team-member {
+    display: inline-block;
+    margin: 20px;
+    width: 250px;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out;
+}
+
+.team-member img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+}
+
+/* Testimonials */
+.testimonials {
+    margin-top: 50px;
+    background: #004d7a;
+    color: white;
+    padding: 50px 20px;
+    border-radius: 10px;
+}
+
+.testimonial {
+    max-width: 600px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    font-style: italic;
+}
+
+.testimonial strong {
+    display: block;
+    margin-top: 10px;
+    color: #fdd835;
+}
+
+/* Contact Section */
+.contact {
+    margin-top: 50px;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 50px auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #008793;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.cta-button:hover {
+    background: #004d7a;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    padding: 15px;
+    margin-top: 50px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .mission-vision {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mission, .vision {
+        width: 90%;
+    }
+
+    .team-member {
+        width: 90%;
+    }
+
+    .about-intro img {
+        width: 100%;
+    }
+}

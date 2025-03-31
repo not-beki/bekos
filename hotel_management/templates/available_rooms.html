@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="mb-5">
+    <h2 class="text-center mb-4">Available Rooms</h2>
+    <div class="row">
+        {% for room in rooms %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="{{ url_for('static', filename='images/' + room.room_type.image) }}" class="card-img-top" alt="{{ room.room_type.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ room.room_type.name }} - Room {{ room.room_number }}</h5>
+                    <p class="card-text">{{ room.room_type.description }}</p>
+                    <ul class="list-group list-group-flush mb-3">
+                        <li class="list-group-item">Price: ${{ room.room_type.base_price }}/night</li>
+                        <li class="list-group-item">Capacity: {{ room.room_type.capacity }} persons</li>
+                    </ul>
+                    <form method="POST" action="{{ url_for('book_room', room_id=room.id) }}">
+                        
+                        <input type="hidden" name="check_in" value="{{ check_in }}">
+                        <input type="hidden" name="check_out" value="{{ check_out }}">
+                        <button type="submit" class="btn btn-primary w-100">Book This Room</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

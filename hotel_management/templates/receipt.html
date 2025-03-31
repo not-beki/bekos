@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Receipt - {{ payment.receipt_number }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        .header { text-align: center; margin-bottom: 20px; }
+        .hotel-name { font-size: 24px; font-weight: bold; }
+        .receipt-title { font-size: 20px; margin: 10px 0; }
+        .receipt-details { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .receipt-details th, .receipt-details td { 
+            padding: 8px; 
+            text-align: left; 
+            border-bottom: 1px solid #ddd;
+        }
+        .total { font-weight: bold; font-size: 18px; }
+        .footer { margin-top: 30px; text-align: center; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="hotel-name">Grand Hotel</div>
+        <div class="receipt-title">PAYMENT RECEIPT</div>
+        <div>Receipt #: {{ payment.receipt_number }}</div>
+    </div>
+
+    <table class="receipt-details">
+        <tr>
+            <th>Date:</th>
+            <td>{{ payment.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+        </tr>
+        <tr>
+            <th>Customer:</th>
+            <td>{{ customer.first_name }} {{ customer.last_name }}</td>
+        </tr>
+        {% if booking %}
+        <tr>
+            <th>Booking Reference:</th>
+            <td>#{{ booking.id }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <th>Payment Method:</th>
+            <td>{{ payment.method|upper }}</td>
+        </tr>
+        <tr>
+            <th>Transaction ID:</th>
+            <td>{{ payment.transaction_id }}</td>
+        </tr>
+        <tr>
+            <td colspan="2"><hr></td>
+        </tr>
+        <tr class="total">
+            <th>Amount Paid:</th>
+            <td>{{ payment.amount }} ETB</td>
+        </tr>
+    </table>
+
+    <div class="footer">
+        <p>Thank you for your business!</p>
+        <p>Grand Hotel | +251 123 456 789 | info@grandhotel.com</p>
+    </div>
+</body>
+</html>

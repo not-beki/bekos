@@ -1,0 +1,80 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="bi bi-calendar-check"></i> Edit Booking #{{ booking.id }}</h1>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="customer_id" class="form-label">Customer</label>
+                    <select class="form-select" id="customer_id" name="customer_id" required>
+                        {% for customer in customers %}
+                        <option value="{{ customer.id }}" {{ 'selected' if customer.id == booking.customer_id }}>
+                            {{ customer.first_name }} {{ customer.last_name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="room_id" class="form-label">Room</label>
+                    <select class="form-select" id="room_id" name="room_id" required>
+                        {% for room in rooms %}
+                        <option value="{{ room.id }}" {{ 'selected' if room.id == booking.room_id }}>
+                            {{ room.room_number }} ({{ room.room_type.name }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="check_in" class="form-label">Check-in</label>
+                    <input type="date" class="form-control" id="check_in" name="check_in" 
+                           value="{{ booking.check_in.strftime('%Y-%m-%d') }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="check_out" class="form-label">Check-out</label>
+                    <input type="date" class="form-control" id="check_out" name="check_out" 
+                           value="{{ booking.check_out.strftime('%Y-%m-%d') }}" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="adults" class="form-label">Adults</label>
+                    <input type="number" class="form-control" id="adults" name="adults" 
+                           min="1" value="{{ booking.adults }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="children" class="form-label">Children</label>
+                    <input type="number" class="form-control" id="children" name="children" 
+                           min="0" value="{{ booking.children }}">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" id="status" name="status">
+                    <option value="Pending" {{ 'selected' if booking.status == 'Pending' }}>Pending</option>
+                    <option value="Confirmed" {{ 'selected' if booking.status == 'Confirmed' }}>Confirmed</option>
+                    <option value="Cancelled" {{ 'selected' if booking.status == 'Cancelled' }}>Cancelled</option>
+                    <option value="Completed" {{ 'selected' if booking.status == 'Completed' }}>Completed</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="payment_status" class="form-label">Payment Status</label>
+                <select class="form-select" id="payment_status" name="payment_status">
+                    <option value="Unpaid" {{ 'selected' if booking.payment_status == 'Unpaid' }}>Unpaid</option>
+                    <option value="Paid" {{ 'selected' if booking.payment_status == 'Paid' }}>Paid</option>
+                    <option value="Refunded" {{ 'selected' if booking.payment_status == 'Refunded' }}>Refunded</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Booking</button>
+            <a href="{{ url_for('manage_bookings') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

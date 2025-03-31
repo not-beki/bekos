@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="mb-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>{{ room_type.name }} Room</h2>
+            <img src="{{ url_for('static', filename='images/' + room_type.image) }}" class="img-fluid mb-3" alt="{{ room_type.name }}">
+            <p>{{ room_type.description }}</p>
+            <ul class="list-group mb-3">
+                <li class="list-group-item">Price: ${{ room_type.base_price }}/night</li>
+                <li class="list-group-item">Capacity: {{ room_type.capacity }} persons</li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Book This Room</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('book_room', room_id=available_rooms[0].id) }}">
+                        <div class="mb-3">
+                            <label for="check_in" class="form-label">Check-in Date</label>
+                            <input type="date" class="form-control" id="check_in" name="check_in" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="check_out" class="form-label">Check-out Date</label>
+                            <input type="date" class="form-control" id="check_out" name="check_out" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adults" class="form-label">Adults</label>
+                            <input type="number" class="form-control" id="adults" name="adults" min="1" value="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="children" class="form-label">Children</label>
+                            <input type="number" class="form-control" id="children" name="children" min="0" value="0">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Book Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('check_in').min = today;
+    
+    document.getElementById('check_in').addEventListener('change', function() {
+        const checkInDate = this.value;
+        document.getElementById('check_out').min = checkInDate;
+    });
+    
+    document.getElementById('check_out').addEventListener('change', function() {
+        const checkInDate = document.getElementById('check_in').value;
+        if (this.value <= checkInDate) {
+            alert('Check-out date must be after check-in date');
+            this.value = '';
+        }
+    });
+});
+</script>
+{% endblock %}

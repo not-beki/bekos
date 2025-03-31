@@ -1,0 +1,165 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="page-header d-flex justify-content-between align-items-center">
+    <h1><i class="bi bi-calendar-check"></i> Bookings</h1>
+    <a href="{{ url_for('manage_bookings') }}?action=new" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Add Booking
+    </a>
+</div>
+
+{% if request.args.get('action') == 'new' %}
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Create New Booking</h5>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="customer_id" class="form-label">Customer</label>
+                    <select class="form-select" id="customer_id" name="customer_id" required>
+                        <option value="">Select Customer</option>
+                        {% for customer in customers %}
+                        <option value="{{ customer.id }}">{{ customer.first_name }} {{ customer.last_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="room_id" class="form-label">Room</label>
+                    <select class="form-select" id="room_id" name="room_id" required>
+                        <option value="">Select Room</option>
+                        {% for room in rooms %}
+                        <option value="{{ room.id }}">{{ room.room_number }} ({{ room.room_type.name }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="check_in" class="form-label">Check-in</label>
+                    <input type="date" class="form-control" id="check_in" name="check_in" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="check_out" class="form-label">Check-out</label>
+                    <input type="date" class="form-control" id="check_out" name="check_out" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="adults" class="form-label">Adults</label>
+                    <input type="number" class="form-control" id="adults" name="adults" min="1" value="1" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="children" class="form-label">Children</label>
+                    <input type="number" class="form-control" id="children" name="children" min="0" value="0">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" id="status" name="status">
+                    <option value="Pending">Pending</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Cancelled">Cancelled</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Booking</button>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5>All Bookings</h5>
+            <div class="btn-group">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Filter
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="?status=all">All</a></li>
+                    <li><a class="dropdown-item" href="?status=Pending">Pending</a></li>
+                    <li><a class="dropdown-item" href="?status=Confirmed">Confirmed</a></li>
+                    <li><a class="dropdown-item" href="?status=Cancelled">Cancelled</a></li>
+                    <li><a class="dropdown-item" href="?status=Completed">Completed</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Customer</th>
+                        <th>Room</th>
+                        <th>Dates</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Payment</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                    <tr>
+                        <td>#{{ booking.id }}</td>
+                        <td>{{ booking.customer.first_name }} {{ booking.customer.last_name }}</td>
+                        <td>{{ booking.room.room_number }}</td>
+                        <td>{{ booking.check_in.strftime('%Y-%m-%d') }} to {{ booking.check_out.strftime('%Y-%m-%d') }}</td>
+                        <td>${{ booking.total_price }}</td>
+                        <td>
+                            <span class="badge bg-{{ 
+                                'warning' if booking.status == 'Pending' 
+                                else 'success' if booking.status == 'Confirmed' 
+                                else 'danger' if booking.status == 'Cancelled' 
+                                else 'info' 
+                            }}">
+                                {{ booking.status }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge bg-{{ 'success' if booking.payment_status == 'Paid' else 'danger' }}">
+                                {{ booking.payment_status }}
+                            </span>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('edit_booking', booking_id=booking.id) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <form method="POST" action="{{ url_for('delete_booking', booking_id=booking.id) }}" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const checkIn = document.getElementById('check_in');
+    const checkOut = document.getElementById('check_out');
+    
+    if (checkIn && checkOut) {
+        const today = new Date().toISOString().split('T')[0];
+        checkIn.min = today;
+        
+        checkIn.addEventListener('change', function() {
+            checkOut.min = this.value;
+        });
+    }
+});
+</script>
+{% endblock %}

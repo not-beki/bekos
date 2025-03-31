@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Complete Your Booking</h2>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info mb-4">
+                        <h5>Room: {{ room.room_number }} ({{ room.room_type.name }})</h5>
+                        <p>Base Price: ${{ room.room_type.base_price }}/night</p>
+                        <p class="fw-bold">Estimated Total: <span id="total-price">$0.00</span></p>
+                        <small class="text-muted">Final price will be confirmed after booking</small>
+                    </div>
+                    
+                    <form method="POST" action="{{ url_for('book_room', room_id=room.id) }}" id="booking-form">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="first_name" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="first_name" name="first_name" required>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="last_name" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="last_name" name="last_name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="check_in" class="form-label">Check-in Date</label>
+                                <input type="date" class="form-control" id="check_in" name="check_in" 
+                                       min="{{ min_date }}" required>
+                                <div class="invalid-feedback">Please select a valid check-in date</div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="check_out" class="form-label">Check-out Date</label>
+                                <input type="date" class="form-control" id="check_out" name="check_out" 
+                                       min="{{ min_date }}" required>
+                                <div class="invalid-feedback">Check-out must be after check-in</div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="adults" class="form-label">Adults</label>
+                                <input type="number" class="form-control" id="adults" name="adults" 
+                                       min="1" max="{{ room.room_type.capacity }}" value="1" required>
+                                <small class="text-muted">Max capacity: {{ room.room_type.capacity }} guests</small>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="children" class="form-label">Children</label>
+                                <input type="number" class="form-control" id="children" name="children" 
+                                       min="0" max="{{ room.room_type.capacity - 1 }}" value="0">
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary" id="submit-btn">
+                                Complete Booking
+                            </button>
+                        </div>
+                        <!-- Add this price display in your form -->
+                        <div class="mb-3">
+                             <label class="form-label">Calculated Price</label>
+                        <div id="price-display" class="form-control-plaintext fw-bold">
+                                 Select room and dates to see price
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.card {
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+    color: white;
+    padding: 1.5rem;
+}
+
+.alert-info {
+    background-color: rgba(42, 67, 101, 0.1);
+    border-left: 4px solid var(--accent-color);
+    color: var(--text-color);
+}
+
+.form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.25rem rgba(221, 107, 32, 0.25);
+}
+
+.btn-primary {
+    background: var(--secondary-color);
+    border: none;
+    font-weight: 600;
+    padding: 12px 30px;
+}
+
+.btn-primary:disabled {
+    opacity: 0.7;
+}
+
+#total-price {
+    color: var(--secondary-color);
+    font-size: 1.2em;
+}
+
+.invalid-feedback {
+    display: none;
+    color: #dc3545;
+}
+
+.was-validated .form-control:invalid ~ .invalid-feedback {
+    display: block;
+}
+</style>
+{% endblock %}
+
+<!-- Add this script section -->
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const roomSelect = document.querySelector('select[name="room_id"]');
+    const checkInInput = document.querySelector('input[name="check_in"]');
+    const checkOutInput = document.querySelector('input[name="check_out"]');
+    const priceDisplay = document.getElementById('price-display');
+
+    function calculatePrice() {
+        if (roomSelect.value && checkInInput.value && checkOutInput.value) {
+            const roomId = roomSelect.value;
+            const checkIn = new Date(checkInInput.value);
+            const checkOut = new Date(checkOutInput.value);
+            
+            fetch(`/api/room/${roomId}/price?check_in=${checkIn.toISOString()}&check_out=${checkOut.toISOString()}`)
+                .then(response => response.json())
+                .then(data => {
+                    priceDisplay.textContent = `$${data.total_price.toFixed(2)}`;
+                });
+        }
+    }
+
+    roomSelect.addEventListener('change', calculatePrice);
+    checkInInput.addEventListener('change', calculatePrice);
+    checkOutInput.addEventListener('change', calculatePrice);
+});
+</script>
+{% endblock %}

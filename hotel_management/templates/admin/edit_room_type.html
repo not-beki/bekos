@@ -1,0 +1,48 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="bi bi-building"></i> Edit Room Type: {{ room_type.name }}</h1>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" 
+                       value="{{ room_type.name }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description">{{ room_type.description }}</textarea>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="base_price" class="form-label">Base Price</label>
+                    <input type="number" step="0.01" class="form-control" id="base_price" name="base_price" 
+                           value="{{ room_type.base_price }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="capacity" class="form-label">Capacity</label>
+                    <input type="number" class="form-control" id="capacity" name="capacity" 
+                           min="1" value="{{ room_type.capacity }}" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="file" class="form-control" id="image" name="image">
+                {% if room_type.image %}
+                    <div class="mt-2">
+                        <img src="{{ url_for('static', filename='images/' + room_type.image) }}" 
+                             alt="{{ room_type.name }}" style="max-height: 100px;">
+                    </div>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary">Update Room Type</button>
+            <a href="{{ url_for('manage_room_types') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "staff/base.html" %}
+
+{% block title %}New Booking{% endblock %}
+
+{% block content %}
+<h2>Create New Booking</h2>
+<form method="POST">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Customer Details</h4>
+            <div class="mb-3">
+                <label class="form-label">First Name</label>
+                <input type="text" name="first_name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Last Name</label>
+                <input type="text" name="last_name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Phone</label>
+                <input type="tel" name="phone" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <h4>Booking Details</h4>
+            <div class="mb-3">
+                <label class="form-label">Room</label>
+                <select name="room_id" class="form-select" required>
+                    {% for room in rooms %}
+                    <option value="{{ room.id }}">
+                        {{ room.room_number }} ({{ room.room_type.name }})
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Check-In Date</label>
+                <input type="date" name="check_in" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Check-Out Date</label>
+                <input type="date" name="check_out" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Adults</label>
+                <input type="number" name="adults" class="form-control" value="1" min="1">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Children</label>
+                <input type="number" name="children" class="form-control" value="0" min="0">
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Create Booking</button>
+</form>
+{% endblock %}

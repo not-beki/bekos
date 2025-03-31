@@ -1,0 +1,387 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Contact Hero -->
+<div class="contact-hero mb-5">
+    <div class="container">
+        <h1 class="display-4">Get In Touch</h1>
+        <p class="lead">We're here to help and answer any questions you may have</p>
+    </div>
+</div>
+
+<!-- Main Contact Section -->
+<section class="contact-main mb-5">
+    <div class="container">
+        <div class="row g-5">
+            <!-- Contact Form -->
+            <div class="col-lg-7">
+                <div class="card shadow-sm">
+                    <div class="card-body p-5">
+                        <h2 class="mb-4">Send Us a Message</h2>
+                        <form method="POST" action="{{ url_for('contact') }}" id="contactForm" novalidate>
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                                        <label for="name">Your Name</label>
+                                        <div class="invalid-feedback">Please enter your name</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                        <label for="email">Email Address</label>
+                                        <div class="invalid-feedback">Please enter a valid email</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+                                    <label for="subject">Subject</label>
+                                    <div class="invalid-feedback">Please enter a subject</div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="message" name="message" placeholder="Message" style="height: 150px" required></textarea>
+                                    <label for="message">Your Message</label>
+                                    <div class="invalid-feedback">Please enter your message</div>
+                                </div>
+                            </div>
+                            <div class="mb-4 form-check">
+                                <input type="checkbox" class="form-check-input" id="consent" required>
+                                <label class="form-check-label" for="consent">I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">privacy policy</a></label>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                                    <span class="submit-text">Send Message</span>
+                                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="col-lg-5">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body p-5">
+                        <h2 class="mb-4">Contact Information</h2>
+                        
+                        <!-- Info Cards -->
+                        <div class="contact-info-card mb-4">
+                            <div class="contact-icon">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <div>
+                                <h5>Our Location</h5>
+                                <p>Lebu <br>Addis Ababa<br>Ethiopia</p>
+                                <a href="#" id="mapTrigger" class="text-primary" data-bs-toggle="modal" data-bs-target="#mapModal">View on Map</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-card mb-4">
+                            <div class="contact-icon">
+                                <i class="bi bi-telephone"></i>
+                            </div>
+                            <div>
+                                <h5>Phone Numbers</h5>
+                                <p>Reservations: +251 988160707<br>Main Desk:  +251 988160707<br>Emergency:  +251 988160707</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-card mb-4">
+                            <div class="contact-icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <div>
+                                <h5>Email Addresses</h5>
+                                <p>General: Wondwossenmichael4@gmailcom<br>Reservations: Wondwossenmichael4@gmailcom<br>Support: Wondwossenmichael4@gmailcom</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-card">
+                            <div class="contact-icon">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <div>
+                                <h5>Opening Hours</h5>
+                                <p>Reception: 24/7<br>Concierge: 6:00 AM - 11:00 PM<br>Restaurant: 7:00 AM - 10:30 PM</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Social Media -->
+                        <div class="social-media mt-5">
+                            <h5 class="mb-3">Connect With Us</h5>
+                            <div class="d-flex">
+                                <a href="#" class="social-icon me-3"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="social-icon me-3"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="social-icon me-3"><i class="bi bi-twitter-x"></i></a>
+                                <a href="#" class="social-icon me-3"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="contact-faq py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="accordion" id="faqAccordion1">
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How do I make a reservation?
+                            </button>
+                        </h3>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion1">
+                            <div class="accordion-body">
+                                You can make a reservation through our website, by calling our reservation line at +1 (555) 123-4567, or by emailing reservations@grandhorizon.com. Online bookings receive a 5% discount.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                What is your cancellation policy?
+                            </button>
+                        </h3>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                            <div class="accordion-body">
+                                Cancellations made 48 hours or more prior to arrival will receive a full refund. Cancellations within 48 hours will be charged one night's stay. Special event periods may have different policies.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="accordion" id="faqAccordion2">
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Do you offer airport transportation?
+                            </button>
+                        </h3>
+                        <div id="faq3" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion2">
+                            <div class="accordion-body">
+                                Yes, we provide both private and shared airport shuttle services. Please contact our concierge at least 24 hours in advance to arrange transportation. Fees vary based on vehicle type and number of passengers.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                Are pets allowed?
+                            </button>
+                        </h3>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion2">
+                            <div class="accordion-body">
+                                We welcome pets up to 25 lbs in our designated pet-friendly rooms. A $75 cleaning fee applies per stay, and we offer special pet amenities including beds, bowls, and treats. Please notify us in advance if bringing a pet.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-outline-primary">View All FAQs</a>
+        </div>
+    </div>
+</section>
+
+<!-- Map Modal -->
+<div class="modal fade" id="mapModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Our Location</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div id="map-container" style="height: 500px;">
+                    <!-- Map will be loaded here -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2152091793237!2d-73.9878449241646!3d40.74844047138972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ0JzU0LjQiTiA3M8KwNTknMTMuNiJX!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus" 
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="https://maps.google.com?q=123+Grand+Horizon+Avenue+Cityville" class="btn btn-primary" target="_blank">
+                    <i class="bi bi-geo-alt"></i> Get Directions
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Privacy Policy Modal -->
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Privacy Policy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Information Collection</h6>
+                <p>We collect personal information you provide when making reservations, contacting us, or using our services. This may include name, email, phone number, and payment details.</p>
+                
+                <h6 class="mt-4">Data Usage</h6>
+                <p>Your information is used to process reservations, improve services, and communicate with you. We do not sell or share your data with third parties for marketing purposes.</p>
+                
+                <h6 class="mt-4">Security Measures</h6>
+                <p>We implement industry-standard security measures to protect your personal information during transmission and storage.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact CTA -->
+<section class="contact-cta py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="mb-4">Still Have Questions?</h2>
+        <p class="lead mb-4">Our team is available 24/7 to assist you with any inquiries</p>
+        <a href="tel:+15551234567" class="btn btn-light btn-lg me-2">
+            <i class="bi bi-telephone"></i> Call Now
+        </a>
+        <a href="mailto:info@grandhorizon.com" class="btn btn-outline-light btn-lg">
+            <i class="bi bi-envelope"></i> Email Us
+        </a>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Form validation
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+    });
+
+    // Form submission loading state
+    const submitBtn = document.getElementById('submitBtn');
+    if (submitBtn) {
+        form.addEventListener('submit', function() {
+            submitBtn.disabled = true;
+            submitBtn.querySelector('.submit-text').classList.add('d-none');
+            submitBtn.querySelector('.spinner-border').classList.remove('d-none');
+        });
+    }
+
+    // Initialize tooltips
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    // Smooth scroll for FAQ links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+});
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.contact-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                url('../images/contact-hero.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 150px 0;
+    text-align: center;
+}
+
+.contact-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+
+.contact-hero .lead {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.contact-info-card {
+    background: white;
+    border-left: 4px solid var(--accent-color);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.contact-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.contact-icon {
+    color: white;
+    background: var(--accent-color);
+}
+
+.social-icon {
+    background: var(--primary-color);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+.contact-cta {
+    background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+    padding: 80px 0;
+}
+
+.contact-cta .btn-light {
+    background: white;
+    color: var(--primary-color);
+    font-weight: 600;
+    padding: 12px 30px;
+}
+
+.contact-cta .btn-outline-light {
+    border-width: 2px;
+    font-weight: 600;
+    padding: 12px 30px;
+}
+
+.form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.25rem rgba(221, 107, 32, 0.25);
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: rgba(42, 67, 101, 0.1);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+</style>
+{% endblock %}

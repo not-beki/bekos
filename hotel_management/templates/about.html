@@ -1,0 +1,466 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="about-hero mb-5">
+    <div class="container">
+        <h1 class="display-4">Our Story</h1>
+        <p class="lead">Where Luxury Meets Heritage</p>
+    </div>
+</div>
+
+<!-- History Section -->
+<section class="history-section py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4">
+                <div class="history-image">
+                    <img src="{{ url_for('static', filename='images/hotel-history.jpg') }}" class="img-fluid rounded" alt="Hotel in 1990s">
+                    <div class="history-badge">Est. 1998</div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <h2 class="mb-4">Our Humble Beginnings</h2>
+                <p>Founded in 1998 as a small 20-room inn, Grand Horizon Hotel began with a simple vision: to create a welcoming retreat for travelers seeking comfort and genuine hospitality.</p>
+                <p>Over the past two decades, we've grown into a premier luxury destination while maintaining the personal touch that made us special from the beginning.</p>
+                <div class="milestones mt-4">
+                    <div class="milestone">
+                        <div class="milestone-year">2005</div>
+                        <div class="milestone-text">First major expansion to 100 rooms</div>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-year">2012</div>
+                        <div class="milestone-text">Awarded "Best Luxury Hotel" by Hospitality Magazine</div>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-year">2020</div>
+                        <div class="milestone-text">Complete renovation with eco-friendly upgrades</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy-section py-5 bg-light">
+    <div class="container text-center">
+        <h2 class="mb-5">Our Philosophy</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="bi bi-heart"></i>
+                    </div>
+                    <h4>Exceptional Service</h4>
+                    <p>We believe true luxury is found in thoughtful details and personalized attention to every guest's needs.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="bi bi-tree"></i>
+                    </div>
+                    <h4>Sustainable Luxury</h4>
+                    <p>Committed to eco-friendly practices without compromising on comfort or quality.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="bi bi-building"></i>
+                    </div>
+                    <h4>Community Roots</h4>
+                    <p>Proudly supporting local artisans, farmers, and businesses throughout our operations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Meet Our Leadership</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="team-card">
+                    <img src="{{ url_for('static', filename='images/ceo.jpg') }}" class="team-photo" alt="CEO">
+                    <div class="team-info">
+                        <h5>Sarah Williamson</h5>
+                        <p class="position">Founder & CEO</p>
+                        <p class="bio">With 30 years in hospitality, Sarah's vision continues to guide our hotel's excellence.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="team-card">
+                    <img src="{{ url_for('static', filename='images/manager.jpg') }}" class="team-photo" alt="General Manager">
+                    <div class="team-info">
+                        <h5>Michael Chen</h5>
+                        <p class="position">General Manager</p>
+                        <p class="bio">Michael brings world-class operational expertise from luxury hotels across 3 continents.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="team-card">
+                    <img src="{{ url_for('static', filename='images/chef.jpg') }}" class="team-photo" alt="Executive Chef">
+                    <div class="team-info">
+                        <h5>Antonio Rossi</h5>
+                        <p class="position">Executive Chef</p>
+                        <p class="bio">Michelin-starred chef Antonio creates unforgettable dining experiences with local ingredients.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Awards Section -->
+<section class="awards-section py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Awards & Recognition</h2>
+        <div class="row">
+            <div class="col-6 col-md-3 mb-4 text-center">
+                <img src="{{ url_for('static', filename='images/award1.png') }}" class="award-img" alt="Luxury Travel Award">
+            </div>
+            <div class="col-6 col-md-3 mb-4 text-center">
+                <img src="{{ url_for('static', filename='images/award2.png') }}" class="award-img" alt="Green Hotel Certification">
+            </div>
+            <div class="col-6 col-md-3 mb-4 text-center">
+                <img src="{{ url_for('static', filename='images/award3.png') }}" class="award-img" alt="Best Service Award">
+            </div>
+            <div class="col-6 col-md-3 mb-4 text-center">
+                <img src="{{ url_for('static', filename='images/award4.png') }}" class="award-img" alt="Readers Choice Award">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Guest Experience Section -->
+<section class="experience-section py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4">
+                <h2 class="mb-4">The Grand Horizon Experience</h2>
+                <p>What sets us apart is our unwavering commitment to creating memorable moments for every guest. From the warm welcome at check-in to the personalized turndown service, every detail is carefully considered.</p>
+                <ul class="experience-list">
+                    <li><i class="bi bi-check-circle"></i> Signature welcome drink upon arrival</li>
+                    <li><i class="bi bi-check-circle"></i> Personalized room preferences remembered</li>
+                    <li><i class="bi bi-check-circle"></i> Twice-daily housekeeping with evening turndown</li>
+                    <li><i class="bi bi-check-circle"></i> 24/7 concierge service for all your needs</li>
+                    <li><i class="bi bi-check-circle"></i> Complimentary cultural experiences weekly</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="video-container">
+                    <img src="{{ url_for('static', filename='images/hotel-video-thumbnail.jpg') }}" class="img-fluid rounded" alt="Hotel Video">
+                    <a href="#" class="play-button" data-bs-toggle="modal" data-bs-target="#videoModal">
+                        <i class="bi bi-play-circle"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Video Modal -->
+<div class="modal fade" id="videoModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action -->
+<section class="about-cta py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="mb-4">Experience Our Hospitality</h2>
+        <p class="lead mb-4">Discover why guests return year after year to our award-winning hotel</p>
+        <a href="{{ url_for('register') }}" class="btn btn-light btn-lg me-2">Book Your Stay</a>
+        <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">Contact Us</a>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.about-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7)), 
+                url('../images/about-hero.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 150px 0;
+    text-align: center;
+}
+
+.about-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.about-hero .lead {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.history-section {
+    background-color: var(--light-color);
+}
+
+.history-badge {
+    background: var(--secondary-color);
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px 25px;
+}
+
+.milestone-year {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+}
+
+/* Philosophy Section - Updated Colors */
+.philosophy-section {
+    background: linear-gradient(135deg, #2a4365, #1a365d); /* Dark blue gradient */
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Optional: Add a subtle pattern overlay */
+.philosophy-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 15px 15px;
+    opacity: 0.3;
+}
+
+.philosophy-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 30px;
+    transition: all 0.4s ease;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.philosophy-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.philosophy-icon {
+    color: #f6ad55; /* Warm accent color */
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.philosophy-card:hover .philosophy-icon {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.philosophy-card h4 {
+    color: white;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.philosophy-card p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Specific icon colors */
+.bi-heart { color: #fc8181; } /* Soft red for heart icon */
+.bi-tree { color: #68d391; }  /* Green for sustainability */
+.bi-building { color: #63b3ed; } /* Blue for community */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .philosophy-card {
+        padding: 20px;
+    }
+    .philosophy-icon {
+        font-size: 2.2rem;
+    }
+}
+
+.team-card {
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+}
+
+.position {
+    color: var(--secondary-color);
+}
+
+.award-img {
+    max-height: 120px;
+    transition: all 0.5s ease;
+}
+
+.experience-list i {
+    color: var(--accent-color);
+}
+
+.about-cta {
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    padding: 80px 0;
+}
+
+.about-cta .btn-light {
+    background: white;
+    color: var(--primary-color);
+    font-weight: 600;
+    padding: 12px 30px;
+}
+
+.about-cta .btn-outline-light {
+    border-width: 2px;
+    font-weight: 600;
+    padding: 12px 30px;
+}
+
+.about-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('../images/about-hero.jpg') no-repeat center center/cover;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+/* History Section Image */
+.history-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.history-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s ease;
+}
+
+.history-image:hover img {
+    transform: scale(1.03);
+}
+
+/* Team Photos */
+.team-photo {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    object-position: top center;
+    border-bottom: 3px solid var(--accent-color);
+}
+
+/* Awards Section */
+.award-img {
+    width: 100%;
+    height: 120px;
+    object-fit: contain;
+    padding: 15px;
+    filter: grayscale(100%) opacity(80%);
+    transition: all 0.3s ease;
+}
+
+.award-img:hover {
+    filter: grayscale(0%) opacity(100%);
+    transform: scale(1.05);
+}
+
+/* Video Thumbnail */
+.video-container {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.video-container img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    color: rgba(255,255,255,0.8);
+    transition: all 0.3s ease;
+}
+
+.play-button:hover {
+    color: var(--accent-color);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .history-image img,
+    .team-photo,
+    .video-container img {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero {
+        min-height: 50vh;
+    }
+    
+    .history-image img,
+    .team-photo,
+    .video-container img {
+        height: 250px;
+    }
+    
+    .award-img {
+        height: 80px;
+    }
+    
+    .play-button {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .team-photo {
+        height: 200px;
+    }
+}
+
+</style>
+{% endblock %}

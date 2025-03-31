@@ -1,0 +1,89 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="page-header d-flex justify-content-between align-items-center">
+    <h1><i class="bi bi-building"></i> Room Types</h1>
+    <a href="{{ url_for('manage_room_types') }}?action=new" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Add Room Type
+    </a>
+</div>
+
+{% if request.args.get('action') == 'new' %}
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Add New Room Type</h5>
+    </div>
+    <div class="card-body">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description"></textarea>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="base_price" class="form-label">Base Price</label>
+                    <input type="number" step="0.01" class="form-control" id="base_price" name="base_price" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="capacity" class="form-label">Capacity</label>
+                    <input type="number" class="form-control" id="capacity" name="capacity" min="1" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="file" class="form-control" id="image" name="image">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Room Type</button>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-header">
+        <h5>All Room Types</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Capacity</th>
+                        <th>Rooms</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for room_type in room_types %}
+                    <tr>
+                        <td>{{ room_type.name }}</td>
+                        <td>{{ room_type.description|truncate(50) }}</td>
+                        <td>${{ room_type.base_price }}</td>
+                        <td>{{ room_type.capacity }}</td>
+                        <td>{{ room_type.rooms|length }}</td>
+                        <td>
+                            <a href="{{ url_for('edit_room_type', type_id=room_type.id) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <form method="POST" action="{{ url_for('delete_room_type', type_id=room_type.id) }}" class="d-inline">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

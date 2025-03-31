@@ -1,0 +1,371 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-section mb-5">
+    <div class="container">
+        <h1 class="display-4">Welcome to Grand Horizon Hotel</h1>
+        <p class="lead">Experience luxury and comfort like never before</p>
+        <div class="hero-cta">
+            <a href="#rooms" class="btn btn-primary btn-lg me-2">View Rooms</a>
+            <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">Contact Us</a>
+        </div>
+    </div>
+</div>
+
+<!-- Special Offers Section -->
+<section class="special-offers py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Special Offers</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card offer-card h-100">
+                    <div class="offer-badge">-20%</div>
+                    <img src="{{ url_for('static', filename='images/summer-special.jpg') }}" class="card-img-top" alt="Summer Special">
+                    <div class="card-body">
+                        <h5 class="card-title">Summer Escape</h5>
+                        <p class="card-text">Enjoy 20% off all room types during summer season. Valid until August 31st.</p>
+                        <a href="#rooms" class="btn btn-outline-primary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card offer-card h-100">
+                    <div class="offer-badge">Free Night</div>
+                    <img src="{{ url_for('static', filename='images/weekend-getaway.jpg') }}" class="card-img-top" alt="Weekend Getaway">
+                    <div class="card-body">
+                        <h5 class="card-title">Weekend Getaway</h5>
+                        <p class="card-text">Stay 2 nights, get 1 night free! Every Friday to Sunday.</p>
+                        <a href="#rooms" class="btn btn-outline-primary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card offer-card h-100">
+                    <div class="offer-badge">Honeymoon</div>
+                    <img src="{{ url_for('static', filename='images/honeymoon-package.jpg') }}" class="card-img-top" alt="Honeymoon Package">
+                    <div class="card-body">
+                        <h5 class="card-title">Romantic Package</h5>
+                        <p class="card-text">Special amenities for couples including champagne and spa credits.</p>
+                        <a href="#rooms" class="btn btn-outline-primary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Rooms Section -->
+<section id="rooms" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Rooms & Suites</h2>
+        <div class="row">
+            {% for room_type in room_types %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 room-card">
+                    <div class="room-type-badge">{{ room_type.name }}</div>
+                    <img src="{{ url_for('static', filename='images/' + room_type.image) }}" class="card-img-top" alt="{{ room_type.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ room_type.name }} Room</h5>
+                        <p class="card-text">{{ room_type.description }}</p>
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item"><i class="bi bi-currency-dollar"></i> Price: ${{ room_type.base_price }}/night</li>
+                            <li class="list-group-item"><i class="bi bi-people"></i> Capacity: {{ room_type.capacity }} persons</li>
+                            <li class="list-group-item"><i class="bi bi-check-circle"></i> Free WiFi</li>
+                            <li class="list-group-item"><i class="bi bi-tv"></i> Smart TV</li>
+                        </ul>
+                        <div class="d-grid">
+                            <a href="{{ url_for('room_details', room_type_id=room_type.id) }}" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Amenities Section -->
+<section class="amenities py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Hotel Amenities</h2>
+        <div class="row text-center">
+            <div class="col-md-3 col-6 mb-4">
+                <div class="amenity-icon">
+                    <i class="bi bi-cup-hot"></i>
+                </div>
+                <h5>24/7 Room Service</h5>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="amenity-icon">
+                    <i class="bi bi-water"></i>
+                </div>
+                <h5>Swimming Pool</h5>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="amenity-icon">
+                    <i class="bi bi-egg-fried"></i>
+                </div>
+                <h5>Free Breakfast</h5>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="amenity-icon">
+                    <i class="bi bi-wifi"></i>
+                </div>
+                <h5>High-Speed WiFi</h5>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="amenity-icon">
+                    <i class="bi bi-bicycle"></i>
+                </div>
+                <h5>Fitness Center</h5>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="amenity-icon">
+                    <i class="bi bi-spa"></i>
+                </div>
+                <h5>Spa & Sauna</h5>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="amenity-icon">
+                    <i class="bi bi-parking"></i>
+                </div>
+                <h5>Free Parking</h5>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="amenity-icon">
+                    <i class="bi bi-building"></i>
+                </div>
+                <h5>Business Center</h5>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">What Our Guests Say</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="rating mb-3">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="card-text">"The most comfortable bed I've ever slept in! The staff went above and beyond to make our anniversary special."</p>
+                        <div class="guest-info">
+                            <img src="{{ url_for('static', filename='images/guest1.jpg') }}" class="guest-avatar" alt="Guest">
+                            <div>
+                                <h6 class="mb-0">Sarah Johnson</h6>
+                                <small>New York, USA</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="rating mb-3">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="card-text">"Excellent location and superb service. The rooftop pool has an amazing view of the city!"</p>
+                        <div class="guest-info">
+                            <img src="{{ url_for('static', filename='images/guest2.jpg') }}" class="guest-avatar" alt="Guest">
+                            <div>
+                                <h6 class="mb-0">Michael Chen</h6>
+                                <small>London, UK</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="rating mb-3">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </div>
+                        <p class="card-text">"Beautiful rooms and fantastic dining options. Will definitely return on our next visit to the city."</p>
+                        <div class="guest-info">
+                            <img src="{{ url_for('static', filename='images/guest3.jpg') }}" class="guest-avatar" alt="Guest">
+                            <div>
+                                <h6 class="mb-0">Emma Rodriguez</h6>
+                                <small>Madrid, Spain</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="mb-4">Ready for an unforgettable stay?</h2>
+        <p class="lead mb-4">Book your perfect room today and enjoy our exclusive member benefits</p>
+        <a href="{{ url_for('register') }}" class="btn btn-light btn-lg me-2">Book Now</a>
+        <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">Contact Us</a>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                url('../images/hotel-lobby.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 150px 0;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-section .lead {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.hero-cta .btn-primary {
+    background: var(--secondary-color);
+    border: none;
+    font-weight: 600;
+    padding: 12px 30px;
+}
+
+.hero-cta .btn-outline-light {
+    border-width: 2px;
+    font-weight: 600;
+    padding: 12px 30px;
+}
+
+.room-card {
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.room-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.room-type-badge {
+    background: var(--secondary-color);
+    color: white;
+    font-weight: 600;
+}
+
+.offer-card {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.offer-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.offer-badge {
+    background: var(--accent-color);
+    font-size: 1.3rem;
+}
+
+.amenity-icon {
+    color: var(--secondary-color);
+    font-size: 2.8rem;
+    transition: all 0.3s ease;
+}
+
+.amenity-icon:hover {
+    transform: scale(1.1);
+    color: var(--accent-color);
+}
+
+.cta-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+    padding: 80px 0;
+}
+
+.cta-section .btn-light {
+    background: white;
+    color: var(--primary-color);
+    font-weight: 600;
+    padding: 12px 30px;
+}
+
+.cta-section .btn-outline-light {
+    border-width: 2px;
+    font-weight: 600;
+    padding: 12px 30px;
+}
+
+.guest-info {
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: 15px;
+}
+
+/* Image Optimization Rules */
+.card-img-top {
+    width: 100%;
+    height: 250px;  /* Standard height for all card images */
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Hero Image */
+.hero-section {
+    background-size: cover;
+    background-position: center;
+    min-height: 80vh;
+}
+
+/* Testimonial Avatars */
+.guest-avatar {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color);
+}
+
+/* Ensure badges stay visible on images */
+.room-type-badge, 
+.offer-badge {
+    position: absolute;
+    z-index: 10;  /* Above images */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 200px;
+    }
+    .hero-section {
+        min-height: 60vh;
+    }
+}
+</style>
+{% endblock %}

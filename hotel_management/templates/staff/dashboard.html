@@ -1,0 +1,37 @@
+{% extends "staff/base.html" %}
+
+{% block title %}Reception Dashboard{% endblock %}
+
+{% block content %}
+<h2>Today's Bookings</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Room</th>
+            <th>Customer</th>
+            <th>Check-In</th>
+            <th>Check-Out</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.room.room_number }}</td>
+            <td>{{ booking.customer.first_name }} {{ booking.customer.last_name }}</td>
+            <td>{{ booking.check_in.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td>{{ booking.check_out.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td>
+                <span class="badge bg-{{ 'success' if booking.status == 'Confirmed' else 'warning' }}">
+                    {{ booking.status }}
+                </span>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5">No bookings today</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

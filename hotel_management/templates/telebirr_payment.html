@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Complete Payment with Telebirr</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        You'll be redirected to Telebirr to complete your payment securely.
+                    </div>
+                    
+                    <div class="payment-summary">
+                        <h5 class="mb-3">Payment Summary</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Amount:</strong> {{ "%.2f"|format(payment.amount) }} ETB</p>
+                                <p><strong>Reference:</strong> {{ payment.transaction_id }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Date:</strong> {{ payment.timestamp.strftime('%Y-%m-%d %H:%M') }}</p>
+                                {% if payment.booking %}
+                                <p><strong>For:</strong> Booking #{{ payment.booking.id }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="telebirr-guide mt-4">
+                        <h5 class="mb-3"><i class="fas fa-mobile-alt me-2"></i>How to pay with Telebirr</h5>
+                        <ol>
+                            <li>You'll be redirected to the Telebirr payment page</li>
+                            <li>Confirm the payment details are correct</li>
+                            <li>Authorize the payment in your Telebirr app</li>
+                            <li>Wait to be redirected back to our site</li>
+                        </ol>
+                        
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Important:</strong> Do not close this window until the payment is complete.
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <div id="redirect-message" class="mb-3">
+                            <p>Redirecting to Telebirr in <span id="countdown">5</span> seconds...</p>
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                        
+                        <a id="manual-redirect" href="#" class="btn btn-primary btn-lg" style="display: none;">
+                            <i class="fas fa-external-link-alt me-1"></i> Proceed to Telebirr
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto-redirect after countdown
+    let seconds = 5;
+    const countdownElement = document.getElementById('countdown');
+    const manualRedirect = document.getElementById('manual-redirect');
+    
+    const countdown = setInterval(function() {
+        seconds--;
+        countdownElement.textContent = seconds;
+        
+        if (seconds <= 0) {
+            clearInterval(countdown);
+            window.location.href = "{{ payment_request.url }}";
+        }
+    }, 1000);
+    
+    // Show manual redirect button after 2 seconds
+    setTimeout(function() {
+        manualRedirect.style.display = 'inline-block';
+        manualRedirect.href = "{{ payment_request.url }}";
+    }, 2000);
+});
+</script>
+
+<style>
+.payment-summary {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.telebirr-guide ol {
+    padding-left: 1.5rem;
+}
+
+.telebirr-guide li {
+    margin-bottom: 0.5rem;
+}
+
+.card-header {
+    padding: 1.5rem;
+}
+
+#countdown {
+    font-weight: bold;
+    color: var(--primary);
+}
+
+#redirect-message {
+    font-size: 1.1rem;
+}
+</style>
+{% endblock %}
